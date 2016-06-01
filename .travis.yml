@@ -1,0 +1,19 @@
+sudo: required
+language: java
+services:
+- docker
+before_install:
+- mkdir /tmp/build
+- docker pull qcifengineering/redbox-builder
+- docker run -v /tmp/build:/build -e "CLONEPATH=https://github.com/the-fascinator/plugin-harvester-workflow.git"
+  qcifengineering/redbox-builder
+install: true
+script: true
+after_success:
+- docker run -v /tmp/build:/build -e "SONATYPE_USERNAME=$SONATYPE_USERNAME" -e "SONATYPE_PASSWORD=$SONATYPE_PASSWORD"
+  qcifengineering/redbox-builder /bin/bash -c "cd build/src;mvn --settings /m2_repo/travis-settings.xml
+  -Dmaven.repo.local=/m2_repo -DskipTests=true deploy"
+env:
+  global:
+  - secure: xdFFT+XKFuqAILzPhC8x4nUqD0K6YyW34o4M18PKD3G1jhq5BCSY6gujvZuBMjM/cBxQSrb9MdFzAO6ZO+8q2bJ8fJCjcjgS5+kB26Pwr4jZ2vxgChZ6177N1e3zJL/SFN57XdESiufzu/JBsvEzMcPk1xY1OXJAdil/MNWDKvEHnvVpC7FLdrpfHz56d4782D81ZXE9pmhEPVktBzw/lfWZQCijMHco62T5g+oUiLbMtU6l3PaA4fllQZOJ1c60SJDg7siKkGu7RTJhCJfe15tmsKyrKx06W3nhR0ewFnp1Z+W0Hl0zIZCC4xpjNTSsQvZrcG9R7LC3lkHdbjuP3IL3WZRdFSBYXGmNhkQlztqligfbU6nSKov1CWGhhKrYR03D8qtssoj0lDTFAOYfkkOXrDXk1PW4lbD6Ry4FeZA+0EId1rd51bPYrvoXXR1q9c08exXti6IGWwv13k/4g9W/dwzjFmYs3nEEckjGp06EUAfc+5odHeZiQjW5JY5aFdAuybBc9E+aBEBfdvbG3f8Br7E/UchMsH7iNqnQkQXv7PDcGGc3CtYprHV7bM7IN8jWOpaU3J7pPVTxuGFGi04kw1njt0SN68nI/cbTMEfid95+NC0B/4rBpeH7J5wHZOBbIkECsvOcw7kISDWg6Lz34283vh0srTU5h5S20Lk=
+  - secure: mfyE/1htjKBmLfYwMrUfmqu6Kex1gDgATqj92xDNj6x7S/HvRGZ/wSfXQhqOnB5eLC0FLm9hU8IJG+3xOLTm+0PpCCmMkYNrUCLIZF4pDguzmRENqiayx9q/Bo5M4GXHe7vKVuQgEighUluLdEkmbY2k+DDr/YcEbY9t7tfUfco1IYyVdiZuuhwArhljme9YdRrDfvW+Smj0urREFoTBpycRFGa0kY9MgecxNP3Qxxa+A+MtR9KeoPlO7ZU0qDJzLOrc4H9om02ckhtS8AvRvX5WwFCLhgt+q/5KtMT1zJDCOlHDc/0LkpC+ORBvd1fuHCFxWch2D57tYtvKL8VL+jQ7yd8VBccufAz8IX0XLiUKE758zyB+mQCBO5AjqyhSEe1SPZNyLA32l2l2VYVU3/xjXHFXi8hITaM1z+YUTLNvNh/Z9/EX7Tm2leUcDyo4rO1HDnYrRD6oR+T8dmQMqPP+JzasadjP2NMfNc7DXSp3ck0WDV1Gv84K8e58Qw5rgjiO2+5MY8UuWk6qnra0+fz24IP4p2EOTMm+dxw3LdUSgDIy6Urx2cOo0IMT6d3omND8P0o3zuuEaSsIw4TGJVxEbiBYh0RlTzhIEh+OtNsz/VFGSN7TbHfqzop/Y/rTI0R0G9b1eItxmpBp9bs6dCeoE1U0NdwbWpBxAhndUpE=
