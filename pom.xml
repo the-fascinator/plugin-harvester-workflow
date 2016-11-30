@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.googlecode.the-fascinator.plugins</groupId>
   <artifactId>plugin-harvester-workflow</artifactId>
-  <version>1.4-SNAPSHOT</version>
+  <version>1.4</version>
   <name>The Fascinator - Plugin - Harvester - Workflow</name>
   <url>https://sites.google.com/site/fascinatorhome/home/documentation/technical/documents/common-library/plugins/harvester/workflows-harvester</url>
   <parent>
@@ -15,12 +15,12 @@
     <dependency>
       <groupId>com.googlecode.the-fascinator</groupId>
       <artifactId>fascinator-common</artifactId>
-      <version>1.4-SNAPSHOT</version>
+      <version>1.4</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.the-fascinator</groupId>
       <artifactId>fascinator-plugin-api</artifactId>
-      <version>1.4-SNAPSHOT</version>
+      <version>1.4</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
